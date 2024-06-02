@@ -1,0 +1,11 @@
+*Holding space for the time being
+SELECT industry
+, COUNT (industry) AS total_companies_in_industry
+, ROUND (AVG (revenue),1) AS avg_revenue
+, ROUND (AVG (employees),0) AS avg_employees
+, SUM (healthcare_benefits) AS total_companies_with_healthcare_benefits
+, ROUND (AVG (paid_time_off_days),1) AS avg_paid_time_off_days
+, ROUND (AVG (maternity_leave_weeks),1) AS avg_maternity_leave_weeks
+, ROUND (AVG (avg_employee_tenure),1) AS avg_employee_tenure
+FROM fortune_companies
+GROUP BY industry;
