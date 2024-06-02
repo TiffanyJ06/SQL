@@ -1,4 +1,6 @@
-*Holding space for the time being
+#Holding space for the time being
+
+#Comparing the average industry revenue, industry company size, and benefits to see if there is any correlation to average employee tenure 
 SELECT industry
 , COUNT (industry) AS total_companies_in_industry
 , ROUND (AVG (revenue),1) AS avg_revenue
@@ -9,3 +11,13 @@ SELECT industry
 , ROUND (AVG (avg_employee_tenure),1) AS avg_employee_tenure
 FROM fortune_companies
 GROUP BY industry;
+
+#Companies in the tech and healthcare industries that offer healthcare benefits and 20 days or more paid time off. 
+SELECT company_name
+, industry
+, paid_time_off_days
+FROM fortune_companies
+WHERE healthcare_benefits=1
+AND paid_time_off_days >=20
+AND industry IN ('Technology', 'Healthcare')
+ORDER BY paid_time_off_days DESC;
