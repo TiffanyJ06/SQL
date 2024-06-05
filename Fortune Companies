@@ -1,6 +1,4 @@
-#Holding space for the time being
-
-#For this project I took this table of what was to be mock Fortune 500 companies and look at it as they were perspective employers. I looked at and compared their company size, retention rates, and benefit packages. 
+#For this project I took this table of what was to be mock Fortune 500 companies and looked at it as they were perspective employers. I looked at and compared their company size, retention rates, and benefit packages. 
 
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
@@ -87,6 +85,7 @@ AND avg_employee_tenure >=6
 ORDER BY avg_employee_tenure DESC;
 
 #I took each industry and averaged just the paid days off. I then had it only show the industries that averaged 20 or more paid days off. 
+
 SELECT industry
 , ROUND (AVG (paid_time_off_days),1) AS avg_paid_time_off_days
 FROM fortune_companies
@@ -94,6 +93,7 @@ GROUP BY industry
 HAVING avg_paid_time_off_days >=20;
 
 #I checked which companies in tech or healthcare offered healthcare and 12 weeks or more maternity leave. 
+
 SELECT company_name
 , industry
 , maternity_leave_weeks
@@ -104,6 +104,7 @@ AND industry IN ('Technology', 'Healthcare')
 ORDER BY maternity_leave_weeks DESC;
 
 #I added a column grouping benefits packages based on their offering of healthcare and paid time off. Where healthcare and 21 or more days off is optimal, healthcare and 14 or more days off needs further review (I would have to look at at other benefits offered), and anything else is unacceptable. 
+
 SELECT company_name
 , industry
 , CASE WHEN healthcare_benefits=1
@@ -112,4 +113,4 @@ WHEN healthcare_benefits=1
 AND paid_time_off_days>=14 THEN "further review"
 ELSE "unacceptable"
 END AS benefits_package
-FROM fortune_companies
+FROM fortune_companies;
