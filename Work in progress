@@ -71,9 +71,22 @@ SELECT industry
 , ROUND (AVG (maternity_leave_weeks),1) AS avg_maternity_leave_weeks
 , ROUND (AVG (avg_employee_tenure),1) AS avg_employee_tenure
 FROM fortune_companies
-GROUP BY industry;
+GROUP BY industry
+ORDER BY avg_employee_tenure DESC;
 
-#Then I took each industry and averaged just the paid days off. I then had it only show the industries that averaged 20 or more paid days off. 
+#I looked at the results from the above query. Manufacturing was the clear winner with all 6 of its companies offering its employees healthcare, it also offered the highest maternity rate of all the other industries. It was 2nd highest in revenue and 3rd highest for average days off and tenure. 
+# With this information I compared the individual companies in the Manufacturing industry. Looking specifically at employee tenure of more than 6 years and paid time off days of 21 or more days. 
+
+SELECT company_name
+, paid_time_off_days
+, avg_employee_tenure
+FROM fortune_companies
+WHERE industry='Manufacturing'
+AND paid_time_off_days >=21
+AND avg_employee_tenure >=6
+ORDER BY avg_employee_tenure DESC;
+
+#I took each industry and averaged just the paid days off. I then had it only show the industries that averaged 20 or more paid days off. 
 SELECT industry
 , ROUND (AVG (paid_time_off_days),1) AS avg_paid_time_off_days
 FROM fortune_companies
